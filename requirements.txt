@@ -1,0 +1,4 @@
+boto3==1.12.39
+sagemaker==1.55.3
+requests==2.21.0
+WooCommerce==2.1.1

@@ -1,0 +1,22 @@
+{
+   "aws_keys":{
+      "access_key":,
+      "secret_key":
+   },
+   "batch_transform_job":{
+      "role_name":,
+      "model_package_arn":,
+      "instance_type":,
+      "instance_count":
+   },
+   "s3":{
+      "region_name":,
+      "bucket":,
+      "input_file":
+   },
+   "woocommerce":{
+      "url":,
+      "consumer_key":,
+      "consumer_secret":
+   }
+}
