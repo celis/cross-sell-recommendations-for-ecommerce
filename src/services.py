@@ -79,7 +79,7 @@ class Woocommerce:
 
         orders_df.to_csv(path, index=False, encoding='utf-8')
 
-    def upload_recommendations(self, path, top_n: 10):
+    def upload_recommendations(self, path, top_n: int = 10):
         recommendations_df = pd.read_csv(path)
 
         products_df = self._get_products()
