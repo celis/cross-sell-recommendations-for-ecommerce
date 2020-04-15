@@ -111,7 +111,7 @@ class Woocommerce:
             product_mapping
         )
         recommendations_df = recommendations_df.dropna(
-            on=["Item in cart", "Recommendation"]
+            subset=["Item in cart", "Recommendation"]
         )
 
         recommendations_df = recommendations_df.sort_values(
