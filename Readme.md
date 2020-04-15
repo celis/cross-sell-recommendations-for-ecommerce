@@ -8,6 +8,10 @@ This project can run locally, it provides a way of automatizing the cross-sell r
 
 After running the full notebook, we will have populated the 'cross_sell_ids' field of our MySQL database (which is empty by default).  Woocommerce provides several options to visualize these product recommendations as sliders on Product or Checkout pages.
 
+## Architecture 
+
+![](https://github.com/celis/personal/blob/master/images/architecture.png)
+
 ## Usage 
 
 Create a virtual enviroment using 
