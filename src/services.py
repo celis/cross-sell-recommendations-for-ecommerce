@@ -6,9 +6,14 @@ import pandas as pd
 class S3:
     """
     Class responsible for downloading (and uploading) objects from S3 (to S3).
+    
+    :param region_name: aws region name
+    :param access_key: aws access key credential
+    :param secret_key: aws secret key credential
+    :param bucket: bucket name
     """
 
-    def __init__(self, region_name, access_key, secret_key, bucket):
+    def __init__(self, region_name: str, access_key: str, secret_key: str, bucket: str):
         self.region_name = region_name
         self.access_key = access_key
         self.secret_key = secret_key
@@ -51,6 +56,9 @@ class Woocommerce:
     """
     Small wrapper around the Woocommerce API responsible for getting the data required for the ML algorithm
     and uploading the cross-sell recommendations
+
+    :param consumer_key: Woocommerce Rest API credentials (read/write)
+    :param consumer_secret: Woocommerce Rest API credentials (read/write)
     """
 
     VERSION = "wc/v3"
@@ -63,23 +71,34 @@ class Woocommerce:
             url=url,
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
-            timeout = 10,
+            timeout=10,
             version=self.VERSION,
         )
 
     def download_data(self, path: str):
+        """
+        Downloads transactional data from the Woocommerce online shop via the Rest API
+
+        :param path: path where the data is going to be stored
+        """
         orders_df = self._get_orders()
         products_df = self._get_products()
 
         orders_df = pd.merge(orders_df, products_df, on="SKUID")
         orders_df = orders_df.sort_values(by="InvoiceID", ascending=True)
 
-        orders_df['InvoiceID'] = orders_df['InvoiceID'].astype(str)
-        orders_df['SKUID'] = orders_df['SKUID'].astype(str)
+        orders_df["InvoiceID"] = orders_df["InvoiceID"].astype(str)
+        orders_df["SKUID"] = orders_df["SKUID"].astype(str)
 
-        orders_df.to_csv(path, index=False, encoding='utf-8')
+        orders_df.to_csv(path, index=False, encoding="utf-8")
 
     def upload_recommendations(self, path, top_n: int = 10):
+        """
+        Uploads  products recommendations to Woocommerce via the Rest API
+        
+        :param path: path where the recommendations are stored
+        :param top_n: to retrieve at most top_n recommendations
+        """
         recommendations_df = pd.read_csv(path)
 
         products_df = self._get_products()
@@ -90,6 +109,9 @@ class Woocommerce:
         )
         recommendations_df["Recommendation"] = recommendations_df["Recommendation"].map(
             product_mapping
+        )
+        recommendations_df = recommendations_df.dropna(
+            on=["Item in cart", "Recommendation"]
         )
 
         recommendations_df = recommendations_df.sort_values(
@@ -107,6 +129,9 @@ class Woocommerce:
             self._api.put(f"products/{row['Item in cart']}", data).json()
 
     def _get_products(self) -> pd.DataFrame:
+        """
+        Gets products data from Woocommerce via the Rest API
+        """
         page = 1
         response = self._api.get(
             "products", params={"per_page": 100, "page": page}
@@ -121,14 +146,20 @@ class Woocommerce:
             products += response
 
         products = [
-            {"SKUID": product["id"], "Item": product["name"].upper()} for product in products
+            {"SKUID": str(product["id"]), "Item": product["name"].upper()}
+            for product in products
         ]
         products_df = pd.DataFrame(products)
         return products_df
 
     def _get_orders(self) -> pd.DataFrame:
+        """
+        Get orders data from the Woocommerce Rest API
+        """
         page = 1
-        response = self._api.get("orders", params={"per_page": 100, "page": page}).json()
+        response = self._api.get(
+            "orders", params={"per_page": 100, "page": page}
+        ).json()
         orders = response.copy()
 
         while response:
@@ -140,8 +171,10 @@ class Woocommerce:
 
         orders = [
             {
-                "InvoiceID": order["id"],
-                "SKUID": list({item["product_id"] for item in order["line_items"]}),
+                "InvoiceID": str(order["id"]),
+                "SKUID": list(
+                    {str(item["product_id"]) for item in order["line_items"]}
+                ),
             }
             for order in orders
         ]

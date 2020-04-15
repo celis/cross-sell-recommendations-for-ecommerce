@@ -4,7 +4,7 @@ from typing import Dict
 
 class Configuration:
     """
-    Configures access to AWS
+    Configures the different services needed
     """
 
     def __init__(self, config_path: str):
