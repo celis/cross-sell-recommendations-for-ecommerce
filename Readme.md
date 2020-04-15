@@ -53,6 +53,14 @@ Create configuration variables file 'configs/config.json', following the templat
 }       
 ```
 
+The repository contains some sample data (in './data/) that can be used for testing purposes:
+
+* flowers_sample_products.csv: sample product inventory used to set up an online shop for the [competition](https://awsmarketplaceml.devpost.com).  Its a small variation around the standard Woocommerce sample product data.
+
+* input_data.csv: Adaptation of the [Mphasis-Mphasis-HyperGraf-Market-Basket-Analysis](https://aws.amazon.com/marketplace/pp/Mphasis-Mphasis-HyperGraf-Market-Basket-Analysis/prodview-y6z3fk7gvudgs) sample input to our online shop.  This file contains artificial orders. 
+
+* output_data.csv: Expected output from the algorithm
+
 
 ## Running Batch Transform Job
 
