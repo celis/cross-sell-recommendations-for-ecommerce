@@ -48,7 +48,7 @@ def cli():
     woocommerce.download_data(args.input)
 
     logging.info("upload data to S3")
-    s3.upload(args.input, "input_data.csv")
+    s3.upload(args.input, config["s3"]["input_file"])
 
     logging.info("configure Batch Transform Job")
     model_package_arn = config["batch_transform_job"]["model_package_arn"]

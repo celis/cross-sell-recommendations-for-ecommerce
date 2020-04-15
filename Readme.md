@@ -22,7 +22,7 @@ Activate the environment
 
     conda activate cross-seller-env
     
-Create configuration variables file 'configs/config.json', following the template provided (type, example):
+Create configuration variables file 'configs/config.json', following the template provided: [(type), (example)]:
 
 ```json
 {
@@ -37,9 +37,9 @@ Create configuration variables file 'configs/config.json', following the templat
       "instance_count": (int, 1)
    },
    "s3":{
-      "region_name": (str, "eu-central-1"),
-      "bucket": (str , "mybucket"),
-      "input_file": (str, "input_data.csv")
+      "region_name": (str) ("eu-central-1"),
+      "bucket": (str) ("mybucket"),
+      "input_file": (str) ("input_data.csv")
    },
    "woocommerce":{
       "url": (str),
