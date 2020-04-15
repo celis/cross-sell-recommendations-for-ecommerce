@@ -22,7 +22,7 @@ Activate the environment
 
     conda activate cross-seller-env
     
-Create configuration variables file 'configs/config.json', following the template provided: [(type), (example)]:
+Create configuration variables file 'configs/config.json', following the template provided:
 
 ```json
 {
@@ -31,15 +31,15 @@ Create configuration variables file 'configs/config.json', following the templat
       "secret_key": (str)
    },
    "batch_transform_job":{
-      "role_name": (str, "AmazonSageMaker-ExecutionRole-..."),
-      "model_package_arn": (str, "arn:aws:sagemaker:eu-central-1:...",
-      "instance_type": (str, "ml.m5.large"),
-      "instance_count": (int, 1)
+      "role_name": (str),
+      "model_package_arn": (str),
+      "instance_type": (str),
+      "instance_count": (int)
    },
    "s3":{
-      "region_name": (str) ("eu-central-1"),
-      "bucket": (str) ("mybucket"),
-      "input_file": (str) ("input_data.csv")
+      "region_name": (str),
+      "bucket": (str),
+      "input_file": (str)
    },
    "woocommerce":{
       "url": (str),
