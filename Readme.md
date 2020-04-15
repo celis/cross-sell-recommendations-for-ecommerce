@@ -18,14 +18,14 @@ Create a virtual enviroment using
 
     conda create -n cross-seller-env pip
     
-Install dependencies with 
-
-    pip install -r requirements.txt
-    
 Activate the environment 
 
     conda activate cross-seller-env
-    
+        
+Install dependencies with 
+
+    pip install -r requirements.txt
+   
 Create configuration variables file 'configs/config.json', following the template provided:
 
 ```json
