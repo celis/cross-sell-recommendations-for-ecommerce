@@ -1,2 +1,5 @@
 *
 !.gitignore
+!input_data.csv
+!output_data.csv
+!flowers_sample_products.csv
