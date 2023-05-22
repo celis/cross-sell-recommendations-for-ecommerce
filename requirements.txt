@@ -1,5 +1,5 @@
 boto3==1.12.39
 sagemaker==1.55.3
-requests==2.21.0
+requests==2.31.0
 WooCommerce==2.1.1
 pandas==0.25.3
